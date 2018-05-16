@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		39269BE9209214D700BF353F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39269BE8209214D700BF353F /* main.m */; };
 		39269BEC209214D700BF353F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39269BEB209214D700BF353F /* AppDelegate.m */; };
-		39269BEF209214D700BF353F /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 39269BEE209214D700BF353F /* GameScene.m */; };
-		39269BF1209214D700BF353F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 39269BF0209214D700BF353F /* GameScene.sks */; };
 		39269BF4209214D700BF353F /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39269BF3209214D700BF353F /* GameViewController.m */; };
 		39269BF7209214D700BF353F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39269BF5209214D700BF353F /* Main.storyboard */; };
 		39269BF9209214D700BF353F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39269BF8209214D700BF353F /* Assets.xcassets */; };
 		39269BFC209214D700BF353F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39269BFA209214D700BF353F /* LaunchScreen.storyboard */; };
+		39269C052092163000BF353F /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 39269C042092163000BF353F /* TitleScene.m */; };
+		39269C08209216AC00BF353F /* GamePlayScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 39269C07209216AC00BF353F /* GamePlayScene.m */; };
+		393F13F220975B370039CD23 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 393F13F120975B370039CD23 /* Util.m */; };
+		39B6A50D20A489B600C54E43 /* DriverNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B6A50C20A489B600C54E43 /* DriverNode.m */; };
+		39B6A51220A627EE00C54E43 /* BackgroundNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B6A51120A627EE00C54E43 /* BackgroundNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,15 +25,22 @@
 		39269BE8209214D700BF353F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		39269BEA209214D700BF353F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		39269BEB209214D700BF353F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		39269BED209214D700BF353F /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		39269BEE209214D700BF353F /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
-		39269BF0209214D700BF353F /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		39269BF2209214D700BF353F /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		39269BF3209214D700BF353F /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		39269BF6209214D700BF353F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		39269BF8209214D700BF353F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		39269BFB209214D700BF353F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39269BFD209214D700BF353F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39269C032092163000BF353F /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleScene.h; path = ../TitleScene.h; sourceTree = "<group>"; };
+		39269C042092163000BF353F /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleScene.m; path = ../TitleScene.m; sourceTree = "<group>"; };
+		39269C06209216AC00BF353F /* GamePlayScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePlayScene.h; sourceTree = "<group>"; };
+		39269C07209216AC00BF353F /* GamePlayScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamePlayScene.m; sourceTree = "<group>"; };
+		393F13F020975B370039CD23 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Util.h; path = ../Util.h; sourceTree = "<group>"; };
+		393F13F120975B370039CD23 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Util.m; path = ../Util.m; sourceTree = "<group>"; };
+		39B6A50B20A489B600C54E43 /* DriverNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DriverNode.h; path = ../DriverNode.h; sourceTree = "<group>"; };
+		39B6A50C20A489B600C54E43 /* DriverNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DriverNode.m; path = ../DriverNode.m; sourceTree = "<group>"; };
+		39B6A51020A627EE00C54E43 /* BackgroundNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundNode.h; sourceTree = "<group>"; };
+		39B6A51120A627EE00C54E43 /* BackgroundNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,11 +73,18 @@
 		39269BE6209214D700BF353F /* mode7FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				39B6A50B20A489B600C54E43 /* DriverNode.h */,
+				39B6A50C20A489B600C54E43 /* DriverNode.m */,
+				393F13F020975B370039CD23 /* Util.h */,
+				393F13F120975B370039CD23 /* Util.m */,
+				39269C032092163000BF353F /* TitleScene.h */,
+				39269C042092163000BF353F /* TitleScene.m */,
+				39269C06209216AC00BF353F /* GamePlayScene.h */,
+				39269C07209216AC00BF353F /* GamePlayScene.m */,
+				39B6A51020A627EE00C54E43 /* BackgroundNode.h */,
+				39B6A51120A627EE00C54E43 /* BackgroundNode.m */,
 				39269BEA209214D700BF353F /* AppDelegate.h */,
 				39269BEB209214D700BF353F /* AppDelegate.m */,
-				39269BED209214D700BF353F /* GameScene.h */,
-				39269BEE209214D700BF353F /* GameScene.m */,
-				39269BF0209214D700BF353F /* GameScene.sks */,
 				39269BF2209214D700BF353F /* GameViewController.h */,
 				39269BF3209214D700BF353F /* GameViewController.m */,
 				39269BF5209214D700BF353F /* Main.storyboard */,
@@ -144,7 +161,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39269BF1209214D700BF353F /* GameScene.sks in Resources */,
 				39269BFC209214D700BF353F /* LaunchScreen.storyboard in Resources */,
 				39269BF9209214D700BF353F /* Assets.xcassets in Resources */,
 				39269BF7209214D700BF353F /* Main.storyboard in Resources */,
@@ -159,9 +175,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				39269BF4209214D700BF353F /* GameViewController.m in Sources */,
+				39B6A51220A627EE00C54E43 /* BackgroundNode.m in Sources */,
+				39B6A50D20A489B600C54E43 /* DriverNode.m in Sources */,
 				39269BEC209214D700BF353F /* AppDelegate.m in Sources */,
-				39269BEF209214D700BF353F /* GameScene.m in Sources */,
+				39269C08209216AC00BF353F /* GamePlayScene.m in Sources */,
 				39269BE9209214D700BF353F /* main.m in Sources */,
+				39269C052092163000BF353F /* TitleScene.m in Sources */,
+				393F13F220975B370039CD23 /* Util.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +328,7 @@
 				39269C02209214D700BF353F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
