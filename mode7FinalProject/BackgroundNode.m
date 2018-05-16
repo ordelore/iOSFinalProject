@@ -15,6 +15,7 @@
     background.position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
     background.anchorPoint = CGPointMake(0.89, 0.38);
     background.name = @"Background";
+    NSLog(@"hi");
     return background;
 }
 -(void)initTileMap
