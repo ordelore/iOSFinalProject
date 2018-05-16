@@ -17,4 +17,6 @@
 -(void)setUpAsAI;
 -(void)moveTick;
 -(CGPoint)getVelocityVector;
+-(double)getScale;
+-(BOOL)canSpeedUp;
 @end

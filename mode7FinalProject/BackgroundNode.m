@@ -17,4 +17,8 @@
     background.name = @"Background";
     return background;
 }
+-(void)initTileMap
+{
+    
+}
 @end

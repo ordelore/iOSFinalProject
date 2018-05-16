@@ -54,8 +54,6 @@
 }
 -(CGPoint)getNewAnchorPoint
 {
-    NSLog(@"%f", self.theta);
-    NSLog(@"%@", NSStringFromCGPoint(self.velocityVector));
     //create a value 0-1.0 for the anchor point
     return [Util divideCGpoint1:self.positionInGame toCGPoint2:CGPointMake(self.frameBounds.size.width, self.frameBounds.size.height)];
 }
@@ -77,5 +75,20 @@
 -(void)addRotation:(double)theta
 {
     self.theta -= theta;
+}
+-(double)getScale
+{
+    return 1 - self.velocity / (5 * self.maxVelocity);
+}
+-(BOOL)canSpeedUp
+{
+    if (fabs(self.velocity) < self.maxVelocity)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 @end

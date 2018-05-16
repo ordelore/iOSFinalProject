@@ -55,6 +55,7 @@
         countdown.text = @"5";
         countdown.name = @"Countdown";
         countdown.fontColor = [UIColor redColor];
+        countdown.zPosition = self.map.zPosition + 1;
         countdown.position = CGPointMake(self.frame.size.width / 2.0, self.frame.size.height - countdown.frame.size.height);
         countdown.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
         [self addChild:countdown];
@@ -89,8 +90,8 @@
     
     if(!self.gameStarted && self.timeSinceLastFrame > self.idealFPS)
     {
-        self.countdownClock -= 1;
         SKLabelNode *countdown = (SKLabelNode *)[self childNodeWithName:@"Countdown"];
+        self.countdownClock -= 1;
         countdown.text = [NSString stringWithFormat:@"%i", self.countdownClock];
         if (self.countdownClock <= 0)
         {
@@ -108,13 +109,24 @@
         {
             self.map.zRotation += 0.05;
             [self.mainCharacter addRotation:0.05];
+            [self.mainCharacter addVelocity:-5.0E-2];
         }
         if(self.isTurningLeft)
         {
             self.map.zRotation -= 0.05;
             [self.mainCharacter addRotation: -0.05];
+            [self.mainCharacter addVelocity:-5.0E-2];
         }
-        [self.mainCharacter addVelocity:1.0E-1];
+        if(!(self.isTurningLeft || self.isTurningRight) && [self.mainCharacter canSpeedUp])
+        {
+            //speed up only if not turning
+            [self.mainCharacter addVelocity:1.0E-1];
+        }
+        
+        if(self.isTurningRight || self.isTurningLeft || [self.mainCharacter canSpeedUp])
+        {
+            [self rescaleMap];
+        }
         [self.mainCharacter moveTick];
         self.map.anchorPoint = [self.mainCharacter getNewAnchorPoint];
     }
@@ -122,8 +134,12 @@
 
 -(void)rescaleMap
 {
-    //self.map.xScale = [self.mainCharacter getVelocity];
-    //self.map.yScale = [self.mainCharacter getVelocity];
+    double scale = [self.mainCharacter getScale];
+    
+    self.map.xScale = scale;
+    self.map.yScale = scale;
+    self.mainCharacter.xScale = scale;
+    self.mainCharacter.yScale = scale;
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
