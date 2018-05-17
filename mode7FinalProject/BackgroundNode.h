@@ -10,5 +10,5 @@
 
 @interface BackgroundNode : SKSpriteNode
 +(instancetype)newBackground:(CGRect)frame;
--(BOOL)isCollidingAtPoint:(CGPoint)point;
+-(BOOL)isCollidingAtPoint:(CGPoint)point withBounds:(CGRect)bounds andRotation:(double)rotation;
 @end

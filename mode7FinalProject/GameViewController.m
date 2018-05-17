@@ -40,12 +40,10 @@
     skView.showsNodeCount = YES;
     /* Sprite Kit applies additional optimizations to improve rendering performance */
     skView.ignoresSiblingOrder = YES;
-    
     // Create and configure the scene.
     //game scene is what we draw onto the screen
     TitleScene *scene = [TitleScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
-    
     // Present the scene.
     [skView presentScene:scene];
     
