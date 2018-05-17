@@ -34,14 +34,19 @@
     double outerRadius = sqrt(pow(bounds.size.width, 2) * 0.25 + pow(bounds.size.height, 2) * 0.25);
     CGPoint outerPoint;
     CGPoint innerPoint;
+    int tileWidth = 8;
     for (int i = 0; i < 2 * PI; i += PI / 2)
     {
-        outerPoint = CGPointMake(outerRadius * cos(i + outerTheta), outerRadius * sin(i + outerTheta));
-        innerPoint = CGPointMake(innerRadius * cos(i + innerTheta), innerRadius * sin(i + innerTheta));
+        outerPoint = CGPointMake(point.x + outerRadius * cos(i + outerTheta), outerRadius * sin(i + outerTheta));
+        innerPoint = CGPointMake(point.y + innerRadius * cos(i + innerTheta), innerRadius * sin(i + innerTheta));
         
+        if (1 == tilemap[(int)outerPoint.y / tileWidth][(int)outerPoint.x / tileWidth] || 1 == tilemap[(int)innerPoint.y / tileWidth][(int)innerPoint.x / tileWidth] )
+        {
+            return YES;
+        }
     }
-    //only return YES if none of the points collide
-    return YES;
+    //only return NO if none of the points collide
+    return NO;
 }
 -(void)initTileMap
 {
