@@ -9,6 +9,7 @@
 #import "BackgroundNode.h"
 #import "Util.h"
 
+
 @interface BackgroundNode()
 {
     NSInteger tilemap[126][128];
@@ -24,7 +25,7 @@
     [background initTileMap];
     return background;
 }
--(BOOL)isCollidingAtPoint:(CGPoint)point withBounds:(CGRect)bounds andRotation:(double)rotation
+-(CGPoint)isCollidingAtPoint:(CGPoint)point withBounds:(CGRect)bounds andRotation:(double)rotation
 {
     //assuming that the thing's anchor point is in the center
     //test the corners, and the midpoints
@@ -35,18 +36,21 @@
     CGPoint outerPoint;
     CGPoint innerPoint;
     int tileWidth = 8;
-    for (int i = 0; i < 2 * PI; i += PI / 2)
+    for (double i = 0; i < 2 * PI; i += PI / 2)
     {
         outerPoint = CGPointMake(point.x + outerRadius * cos(i + outerTheta), outerRadius * sin(i + outerTheta));
         innerPoint = CGPointMake(point.y + innerRadius * cos(i + innerTheta), innerRadius * sin(i + innerTheta));
-        
-        if (1 == tilemap[(int)outerPoint.y / tileWidth][(int)outerPoint.x / tileWidth] || 1 == tilemap[(int)innerPoint.y / tileWidth][(int)innerPoint.x / tileWidth] )
+        if (1 == tilemap[(int)outerPoint.y / tileWidth][(int)outerPoint.x / tileWidth])
         {
-            return YES;
+            return CGPointMake(-cos(i + outerTheta), -sin(i+innerTheta));
+        }
+        if (1 == tilemap[(int) (innerPoint.y / tileWidth)][(int) (innerPoint.x / tileWidth)])
+        {
+            return CGPointMake(-cos(i+innerTheta), -sin(i+innerTheta));
         }
     }
-    //only return NO if none of the points collide
-    return NO;
+    //only return 0 if none of the points collide
+    return CGPointMake(0, 0);
 }
 -(void)initTileMap
 {
@@ -63,5 +67,18 @@
         tilemap[0][i] = 1;
         tilemap[125][i] = 1;
     }
+    
+    //Used for determining if the
+    NSString *line = @"";
+    for (int i = 0; i < 126; i++)
+    {
+        for (int j = 0; j < 128; j++)
+        {
+            line = [line stringByAppendingString:[NSString stringWithFormat:@"%i", tilemap[i][j]]];
+        }
+        [Util IFPrint:[line stringByAppendingString:@"\n"]];
+        line = @"";
+    }
 }
+
 @end

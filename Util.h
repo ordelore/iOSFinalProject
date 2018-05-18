@@ -16,4 +16,7 @@ static const double PI = 3.14159265358979323846264338327;
 +(CGPoint)multiplyCGpoint1:(CGPoint)p1 toCGPoint2:(CGPoint)p2;
 +(CGPoint)divideCGpoint1:(CGPoint)p1 toCGPoint2:(CGPoint)p2;
 +(double)vectorMagnitudeOfVector:(CGPoint)p1;
++(BOOL)point:(CGPoint)p1 equals:(CGPoint)p2;
++(CGPoint)pointMultiplied:(CGPoint)p1 byScalar:(double)x;
++(void)IFPrint:(NSString *) format, ...;
 @end

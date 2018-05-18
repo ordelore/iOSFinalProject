@@ -8,7 +8,8 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+
 @interface BackgroundNode : SKSpriteNode
 +(instancetype)newBackground:(CGRect)frame;
--(BOOL)isCollidingAtPoint:(CGPoint)point withBounds:(CGRect)bounds andRotation:(double)rotation;
+-(CGPoint)isCollidingAtPoint:(CGPoint)point withBounds:(CGRect)bounds andRotation:(double)rotation;
 @end

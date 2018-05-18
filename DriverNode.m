@@ -80,6 +80,15 @@
 {
     return 1 - self.velocity / (5 * self.maxVelocity);
 }
+-(CGPoint)getIngamePosition
+{
+    return self.positionInGame;
+}
+-(void)collidedWithVector:(CGPoint)point
+{
+    self.velocityVector = [Util addCGpoint1:self.velocityVector toCGPoint2:[Util pointMultiplied:point byScalar:self.velocity / 2.0]];
+    self.velocity = [Util vectorMagnitudeOfVector:self.velocityVector];
+}
 -(BOOL)canSpeedUp
 {
     if (fabs(self.velocity) < self.maxVelocity)

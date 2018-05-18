@@ -19,4 +19,6 @@
 -(CGPoint)getVelocityVector;
 -(double)getScale;
 -(BOOL)canSpeedUp;
+-(CGPoint)getIngamePosition;
+-(void)collidedWithVector:(CGPoint)point;
 @end

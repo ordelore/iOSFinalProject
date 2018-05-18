@@ -46,8 +46,8 @@
         
         self.map = [BackgroundNode newBackground:self.frame];
         [self addChild:self.map];
-        
-        self.mainCharacter = [DriverNode newDriverNodeAtPosition:CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2) inMap:self.map.frame];
+        //0.89, 0.38
+        self.mainCharacter = [DriverNode newDriverNodeAtPosition:CGPointMake(0.89 * self.frame.size.width, 0.38 * self.frame.size.height) inMap:self.map.frame];
         [self addChild:self.mainCharacter];
         
         SKLabelNode *countdown = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
@@ -126,6 +126,13 @@
         if(self.isTurningRight || self.isTurningLeft || [self.mainCharacter canSpeedUp])
         {
             [self rescaleMap];
+        }
+        CGPoint possibleCollisionVector = [self.map isCollidingAtPoint:[self.mainCharacter getIngamePosition] withBounds:self.mainCharacter.frame andRotation:self.map.zRotation];
+        //only calculate collision if collision occurred
+        
+        if (![Util point:possibleCollisionVector equals:CGPointMake(0, 0)])
+        {
+            [self.mainCharacter collidedWithVector:possibleCollisionVector];
         }
         [self.mainCharacter moveTick];
         self.map.anchorPoint = [self.mainCharacter getNewAnchorPoint];
