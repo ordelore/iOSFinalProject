@@ -27,6 +27,7 @@
 @property (nonatomic) double theta;
 @property (nonatomic) double k;
 @property (nonatomic) DriverNode *mainCharacter;
+@property (nonatomic) NSTimeInterval timeElapsed;
 @end
 
 @implementation GamePlayScene
@@ -47,7 +48,7 @@
         self.map = [BackgroundNode newBackground:self.frame];
         [self addChild:self.map];
         //0.89, 0.38
-        self.mainCharacter = [DriverNode newDriverNodeAtPosition:CGPointMake(0.89 * self.frame.size.width, 0.38 * self.frame.size.height) inMap:self.map.frame];
+        self.mainCharacter = [DriverNode newDriverNodeAtPosition:CGPointMake(0.89, 0.38) inMap:self.map.frame inFrame:self.frame];
         [self addChild:self.mainCharacter];
         
         SKLabelNode *countdown = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
@@ -60,6 +61,16 @@
         countdown.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
         [self addChild:countdown];
         
+        SKLabelNode *timer = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
+        timer.fontSize = 50;
+        timer.text = [NSString stringWithFormat:@"%f", self.timeElapsed];
+        timer.name = @"Timer";
+        timer.fontColor = [SKColor whiteColor];
+        timer.zPosition = self.map.zPosition + 1;
+        timer.position = CGPointMake(self.frame.size.width * 2 / 3, self.frame.size.height - timer.frame.size.height);
+        timer.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        [self addChild:timer];
+        
         //set up global variables
         self.timeSinceLastFrame = 0;
         self.isTurningLeft = NO;
@@ -71,12 +82,7 @@
         self.countdownClock = 5;
         self.lastUpdateTimeInterval = 0;
         self.timeSinceLastFrame = 0;
-        
-        //testing variables
-        self.i = 0.0;
-        self.j = 0.0;
-        self.theta = 0.1;
-        self.k = 0;
+        self.timeElapsed = 0;
     }
     return self;
 }
@@ -85,6 +91,7 @@
     if(self.lastUpdateTimeInterval)
     {
         self.timeSinceLastFrame += currentTime - self.lastUpdateTimeInterval;
+        self.timeElapsed += currentTime - self.lastUpdateTimeInterval;
     }
     self.lastUpdateTimeInterval = currentTime;
     
@@ -104,7 +111,11 @@
     //only run this code every fps tick
     if (self.gameStarted && self.timeSinceLastFrame > self.idealFPS)
     {
-        //self.theta += 0.1;
+        //update timer
+        
+        SKLabelNode *timer = (SKLabelNode *)[self childNodeWithName:@"Timer"];
+        timer.text = [NSString stringWithFormat:@"%i:%i:%i", (int) self.timeElapsed / 60, (int) self.timeElapsed - 60 * ((int) self.timeElapsed / 60), 0];
+        
         if(self.isTurningRight)
         {
             self.map.zRotation += 0.05;

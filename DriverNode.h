@@ -9,7 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface DriverNode : SKSpriteNode
-+(instancetype)newDriverNodeAtPosition:(CGPoint)position inMap:(CGRect)map;
++(instancetype)newDriverNodeAtPosition:(CGPoint)position inMap:(CGRect)map inFrame:(CGRect)frame;
 -(CGPoint)getNewAnchorPoint;
 -(void)addRotation:(double)theta;
 -(void)addVelocity:(double)velocity;

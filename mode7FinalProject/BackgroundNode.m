@@ -38,8 +38,8 @@
     int tileWidth = 8;
     for (double i = 0; i < 2 * PI; i += PI / 2)
     {
-        outerPoint = CGPointMake(point.x + outerRadius * cos(i + outerTheta), outerRadius * sin(i + outerTheta));
-        innerPoint = CGPointMake(point.y + innerRadius * cos(i + innerTheta), innerRadius * sin(i + innerTheta));
+        outerPoint = CGPointMake(point.x + outerRadius * cos(i + outerTheta), point.y + outerRadius * sin(i + outerTheta));
+        innerPoint = CGPointMake(point.x + innerRadius * cos(i + innerTheta), point.y + innerRadius * sin(i + innerTheta));
         if (1 == tilemap[(int)outerPoint.y / tileWidth][(int)outerPoint.x / tileWidth])
         {
             return CGPointMake(-cos(i + outerTheta), -sin(i+innerTheta));

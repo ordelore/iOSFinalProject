@@ -16,17 +16,21 @@
 @property (nonatomic) double theta;
 @property (nonatomic) BOOL isAI;
 @property (nonatomic) double maxVelocity;
-@property (nonatomic) CGRect frameBounds;
+@property (nonatomic) double frameBoundsX;
+@property (nonatomic) double frameBoundsY;
 @end
 
 @implementation DriverNode
-+(instancetype)newDriverNodeAtPosition:(CGPoint)position inMap:(CGRect)map
++(instancetype)newDriverNodeAtPosition:(CGPoint)position inMap:(CGRect)map inFrame:(CGRect)frame
 {
     DriverNode *driver = [self spriteNodeWithImageNamed:@"mainCharacter"];
-    [driver initializeWithPosition:position inMap:map];
-    driver.position = position;
+    //anchor point = position / map
+    //position = anchor point * map
+    [driver initializeWithPosition:[Util multiplyCGpoint1:position toCGPoint2:CGPointMake(map.size.width, map.size.height)] inMap:map];
+    driver.position = CGPointMake(frame.size.width / 2, frame.size.height / 2);
     driver.zPosition = 1;
     driver.name = @"mario";
+    [Util IFPrint:NSStringFromCGPoint([driver getIngamePosition])];
     return driver;
 }
 -(void)initializeWithPosition:(CGPoint)position inMap:(CGRect)map
@@ -37,7 +41,8 @@
     self.isAI = NO;
     self.maxVelocity = 5;
     self.velocityVector = CGPointMake(0, 0);
-    self.frameBounds = map;
+    self.frameBoundsX = map.size.width;
+    self.frameBoundsY = map.size.height;
 }
 -(void)moveTick
 {
@@ -55,16 +60,12 @@
 -(CGPoint)getNewAnchorPoint
 {
     //create a value 0-1.0 for the anchor point
-    return [Util divideCGpoint1:self.positionInGame toCGPoint2:CGPointMake(self.frameBounds.size.width, self.frameBounds.size.height)];
+    [Util IFPrint:NSStringFromCGPoint([Util divideCGpoint1:self.positionInGame toCGPoint2:CGPointMake(self.frameBoundsX, self.frameBoundsY)])];
+    return [Util divideCGpoint1:self.positionInGame toCGPoint2:CGPointMake(self.frameBoundsX, self.frameBoundsY)];
 }
 -(void)addVelocity:(double)velocity
 {
-    double possibleNewVelocity = velocity + self.velocity;
-    //only change magnitude if it can be changed
-    if (fabs(possibleNewVelocity) < self.maxVelocity)
-    {
-        self.velocity = possibleNewVelocity;
-    }
+    self.velocity = velocity + self.velocity;
     //depends on rotation
     self.velocityVector = CGPointMake(self.velocity * cos(self.theta), self.velocity * sin(self.theta));
 }
