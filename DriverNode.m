@@ -30,7 +30,6 @@
     driver.position = CGPointMake(frame.size.width / 2, frame.size.height / 2);
     driver.zPosition = 1;
     driver.name = @"mario";
-    [Util IFPrint:NSStringFromCGPoint([driver getIngamePosition])];
     return driver;
 }
 -(void)initializeWithPosition:(CGPoint)position inMap:(CGRect)map
@@ -60,7 +59,6 @@
 -(CGPoint)getNewAnchorPoint
 {
     //create a value 0-1.0 for the anchor point
-    [Util IFPrint:NSStringFromCGPoint([Util divideCGpoint1:self.positionInGame toCGPoint2:CGPointMake(self.frameBoundsX, self.frameBoundsY)])];
     return [Util divideCGpoint1:self.positionInGame toCGPoint2:CGPointMake(self.frameBoundsX, self.frameBoundsY)];
 }
 -(void)addVelocity:(double)velocity
@@ -68,6 +66,8 @@
     self.velocity = velocity + self.velocity;
     //depends on rotation
     self.velocityVector = CGPointMake(self.velocity * cos(self.theta), self.velocity * sin(self.theta));
+    //self.theta = atan(self.velocityVector.y / self.velocityVector.x);
+    [Util IFPrint:[NSString stringWithFormat:@"%f : %f\n", self.theta, atan(self.velocityVector.y / self.velocityVector.x)]];
 }
 -(double)getVelocity
 {
@@ -87,7 +87,9 @@
 }
 -(void)collidedWithVector:(CGPoint)point
 {
-    self.velocityVector = [Util addCGpoint1:self.velocityVector toCGPoint2:[Util pointMultiplied:point byScalar:self.velocity / 2.0]];
+    self.velocityVector = [Util addCGpoint1:self.velocityVector toCGPoint2:[Util pointMultiplied:point byScalar:self.velocity]];
+    self.theta = atan(self.velocityVector.y / self.velocityVector.x);
+    //self.theta = atan(point.y / point.x);
     self.velocity = [Util vectorMagnitudeOfVector:self.velocityVector];
 }
 -(BOOL)canSpeedUp
@@ -100,5 +102,9 @@
     {
         return false;
     }
+}
+-(double)getRotation
+{
+    return self.theta;
 }
 @end

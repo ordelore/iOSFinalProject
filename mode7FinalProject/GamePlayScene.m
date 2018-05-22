@@ -114,17 +114,15 @@
         //update timer
         
         SKLabelNode *timer = (SKLabelNode *)[self childNodeWithName:@"Timer"];
-        timer.text = [NSString stringWithFormat:@"%i:%i:%i", (int) self.timeElapsed / 60, (int) self.timeElapsed - 60 * ((int) self.timeElapsed / 60), 0];
+        timer.text = [NSString stringWithFormat:@"%i:%i:%i", (int) self.timeElapsed / 30, (int) self.timeElapsed - 30 * ((int) self.timeElapsed / 30), 0];
         
         if(self.isTurningRight)
         {
-            self.map.zRotation += 0.05;
             [self.mainCharacter addRotation:0.05];
             [self.mainCharacter addVelocity:-5.0E-2];
         }
         if(self.isTurningLeft)
         {
-            self.map.zRotation -= 0.05;
             [self.mainCharacter addRotation: -0.05];
             [self.mainCharacter addVelocity:-5.0E-2];
         }
@@ -136,6 +134,7 @@
         
         if(self.isTurningRight || self.isTurningLeft || [self.mainCharacter canSpeedUp])
         {
+            self.map.zRotation = PI / 2 - [self.mainCharacter getRotation];
             [self rescaleMap];
         }
         CGPoint possibleCollisionVector = [self.map isCollidingAtPoint:[self.mainCharacter getIngamePosition] withBounds:self.mainCharacter.frame andRotation:self.map.zRotation];
@@ -144,6 +143,8 @@
         if (![Util point:possibleCollisionVector equals:CGPointMake(0, 0)])
         {
             [self.mainCharacter collidedWithVector:possibleCollisionVector];
+            SKAction *rotate = [SKAction rotateByAngle:[self.mainCharacter getRotation] - self.map.zPosition duration:0.1];
+            [self.map runAction:rotate];
         }
         [self.mainCharacter moveTick];
         self.map.anchorPoint = [self.mainCharacter getNewAnchorPoint];

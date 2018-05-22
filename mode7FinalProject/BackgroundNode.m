@@ -32,7 +32,7 @@
     double innerTheta = rotation;
     double outerTheta = PI / 4 + rotation;
     double innerRadius = bounds.size.width / 2;
-    double outerRadius = sqrt(pow(bounds.size.width, 2) * 0.25 + pow(bounds.size.height, 2) * 0.25);
+    double outerRadius = 0.5 * sqrt(pow(bounds.size.width, 2) + pow(bounds.size.height, 2));
     CGPoint outerPoint;
     CGPoint innerPoint;
     int tileWidth = 8;
@@ -40,13 +40,16 @@
     {
         outerPoint = CGPointMake(point.x + outerRadius * cos(i + outerTheta), point.y + outerRadius * sin(i + outerTheta));
         innerPoint = CGPointMake(point.x + innerRadius * cos(i + innerTheta), point.y + innerRadius * sin(i + innerTheta));
-        if (1 == tilemap[(int)outerPoint.y / tileWidth][(int)outerPoint.x / tileWidth])
+        if (!(outerPoint.y > tileWidth * 126 || outerPoint.x > tileWidth * 128 || innerPoint.y > tileWidth * 126 || innerPoint.x > tileWidth * 128))
         {
-            return CGPointMake(-cos(i + outerTheta), -sin(i+innerTheta));
-        }
-        if (1 == tilemap[(int) (innerPoint.y / tileWidth)][(int) (innerPoint.x / tileWidth)])
-        {
-            return CGPointMake(-cos(i+innerTheta), -sin(i+innerTheta));
+            if (1 == tilemap[(int)(outerPoint.y / tileWidth)][(int)outerPoint.x / tileWidth])
+            {
+                return CGPointMake(-cos(i+outerTheta), -sin(i+outerTheta));
+            }
+            if (1 == tilemap[(int)(innerPoint.y / tileWidth)][(int)(innerPoint.x / tileWidth)])
+            {
+                return CGPointMake(-cos(i+innerTheta), -sin(i+innerTheta));
+            }
         }
     }
     //only return 0 if none of the points collide

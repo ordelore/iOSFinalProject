@@ -21,4 +21,5 @@
 -(BOOL)canSpeedUp;
 -(CGPoint)getIngamePosition;
 -(void)collidedWithVector:(CGPoint)point;
+-(double)getRotation;
 @end
