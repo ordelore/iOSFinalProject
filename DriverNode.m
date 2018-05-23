@@ -47,6 +47,10 @@
 {
     //using the velocity and position to get virtual position
     self.positionInGame = [Util addCGpoint1:self.positionInGame toCGPoint2:[self getVelocityVector]];
+    if (![self canSpeedUp])
+    {
+        [self addVelocity:-5E-2];
+    }
 }
 -(CGPoint)getVelocityVector
 {
@@ -66,8 +70,8 @@
     self.velocity = velocity + self.velocity;
     //depends on rotation
     self.velocityVector = CGPointMake(self.velocity * cos(self.theta), self.velocity * sin(self.theta));
-    //self.theta = atan(self.velocityVector.y / self.velocityVector.x);
-    [Util IFPrint:[NSString stringWithFormat:@"%f : %f\n", self.theta, atan(self.velocityVector.y / self.velocityVector.x)]];
+//    //self.theta = atan(self.velocityVector.y / self.velocityVector.x);
+//    [Util IFPrint:[NSString stringWithFormat:@"%f : %f\n", self.theta, atan(self.velocityVector.y / self.velocityVector.x)]];
 }
 -(double)getVelocity
 {
@@ -75,7 +79,7 @@
 }
 -(void)addRotation:(double)theta
 {
-    self.theta -= theta;
+    self.theta -= self.theta;
 }
 -(double)getScale
 {
@@ -87,7 +91,7 @@
 }
 -(void)collidedWithVector:(CGPoint)point
 {
-    self.velocityVector = [Util addCGpoint1:self.velocityVector toCGPoint2:[Util pointMultiplied:point byScalar:self.velocity]];
+    self.velocityVector = [Util addCGpoint1:self.velocityVector toCGPoint2:point];
     self.theta = atan(self.velocityVector.y / self.velocityVector.x);
     //self.theta = atan(point.y / point.x);
     self.velocity = [Util vectorMagnitudeOfVector:self.velocityVector];

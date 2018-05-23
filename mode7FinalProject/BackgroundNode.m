@@ -29,26 +29,18 @@
 {
     //assuming that the thing's anchor point is in the center
     //test the corners, and the midpoints
-    double innerTheta = rotation;
     double outerTheta = PI / 4 + rotation;
-    double innerRadius = bounds.size.width / 2;
     double outerRadius = 0.5 * sqrt(pow(bounds.size.width, 2) + pow(bounds.size.height, 2));
     CGPoint outerPoint;
-    CGPoint innerPoint;
     int tileWidth = 8;
     for (double i = 0; i < 2 * PI; i += PI / 2)
     {
         outerPoint = CGPointMake(point.x + outerRadius * cos(i + outerTheta), point.y + outerRadius * sin(i + outerTheta));
-        innerPoint = CGPointMake(point.x + innerRadius * cos(i + innerTheta), point.y + innerRadius * sin(i + innerTheta));
-        if (!(outerPoint.y > tileWidth * 126 || outerPoint.x > tileWidth * 128 || innerPoint.y > tileWidth * 126 || innerPoint.x > tileWidth * 128))
+        if (!(outerPoint.y > tileWidth * 126 || outerPoint.x > tileWidth * 128 ))
         {
             if (1 == tilemap[(int)(outerPoint.y / tileWidth)][(int)outerPoint.x / tileWidth])
             {
-                return CGPointMake(-cos(i+outerTheta), -sin(i+outerTheta));
-            }
-            if (1 == tilemap[(int)(innerPoint.y / tileWidth)][(int)(innerPoint.x / tileWidth)])
-            {
-                return CGPointMake(-cos(i+innerTheta), -sin(i+innerTheta));
+                return CGPointMake(-cos(i+outerTheta), 0);
             }
         }
     }
